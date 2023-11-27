@@ -13,8 +13,8 @@ namespace ModelScript.Physics.Particle
         int group = 0;
         public Dictionary<string, float> attributes = new Dictionary<string, float>();
 
-        Vector3D position;
-        Vector3D velocity;
+        public Vector3D position;
+        public Vector3D velocity;
 
         public ParticleBase(int group, Vector3D position, Vector3D velocity)
         {
