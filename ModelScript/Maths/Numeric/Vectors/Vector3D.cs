@@ -37,6 +37,26 @@ namespace ModelScript.Maths.Numeric.Vectors
             return new Vector3D(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
         }
 
+        public static Vector3D operator *(Vector3D v1, Vector3D v2)
+        {
+            return new Vector3D(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
+        }
+
+        public static Vector3D operator /(Vector3D v1, Vector3D v2)
+        {
+            return new Vector3D(v1.x / v2.x, v1.y / v2.y, v1.z / v2.z);
+        }
+
+        public static Vector3D operator *(Vector3D v1, float v2)
+        {
+            return new Vector3D(v1.x * v2, v1.y * v2, v1.z * v2);
+        }
+
+        public static Vector3D operator /(Vector3D v1, float v2)
+        {
+            return new Vector3D(v1.x / v2, v1.y / v2, v1.z / v2);
+        }
+
 
     }
 }
