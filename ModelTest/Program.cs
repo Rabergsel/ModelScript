@@ -10,10 +10,10 @@ var frame = new GraphFrame();
 frame.setHeight(1000, 1000);
 
 var pointGraph = new LineGraph();
-pointGraph.addValue(1, 1);
-pointGraph.addValue(2, 3);
-pointGraph.addValue(3, 3);
-pointGraph.addValue(4, 4);
+for(float x = 0; x < 5; x+=0.00001f)
+{
+    pointGraph.addValue(x, x * x - 1);
+}
 frame.addGraph(pointGraph);
 var graph = frame.render();
 
