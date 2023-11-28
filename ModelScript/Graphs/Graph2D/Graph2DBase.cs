@@ -11,7 +11,7 @@ namespace ModelScript.Graphs.Graph2D
     public abstract class Graph2DBase : GraphBase
     {
         public List<PointF> values = new List<PointF>();
-        ScalerBase scaler = new LinearScaler();
+        public ScalerBase scaler = new LinearScaler();
 
         private PointF minBounds = new PointF(float.MaxValue, float.MaxValue);
         private PointF maxBounds = new PointF(float.MinValue, float.MinValue);
@@ -21,6 +21,7 @@ namespace ModelScript.Graphs.Graph2D
         public  void addValue(float x, float y)
         {
             values.Add(new PointF(x, y));
+        //    Console.WriteLine("Graph2DBase.addValue(): Added {0}|{1}", x, y);
         }
 
         public void addValue(PointF pointF)
@@ -39,6 +40,19 @@ namespace ModelScript.Graphs.Graph2D
                 if (p.Y > maxBounds.Y) maxBounds.Y = p.Y;
 
             }
+
+            if(minBounds.X == maxBounds.X)
+            {
+                minBounds.X -= 1;
+                maxBounds.X += 1;
+            }
+            if (minBounds.Y == maxBounds.Y)
+            {
+                minBounds.Y -= 1;
+                maxBounds.Y += 1;
+            }
+
+            //Console.WriteLine("Graph2DBase.evaluateBounds(): Min = {0}\tMax = {1}", minBounds.X, minBounds.Y);
         }
 
         internal void evaluateCoords(int width, int height)
@@ -54,6 +68,7 @@ namespace ModelScript.Graphs.Graph2D
                 point.Y = (int)(y * height);
 
                 coords.Add(point);
+             //   Console.WriteLine("Graph2DBase.evaluateCoords(): Mapped ({0}|{1}) to ({2}|{3})", p.X, p.Y, point.X, point.Y);
 
             }
         }

@@ -25,7 +25,7 @@ namespace ModelScript.Physics.Particle
 
         public Vector3D deltaPosition(float seconds)
         {
-            return position + (velocity* seconds);
+            return (velocity* seconds);
         }
 
         public void move(Vector3D delta)

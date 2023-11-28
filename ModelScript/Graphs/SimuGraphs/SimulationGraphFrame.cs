@@ -6,20 +6,34 @@ using System.Threading.Tasks;
 
 using SkiaSharp;
 
+using ModelScript.Physics.Particle;
+using ModelScript.Physics.Particle.Emitter;
+
 namespace ModelScript.Graphs.SimuGraphs
 {
     public class SimulationGraphFrame
     {
         List<SimulationGraphBase> graphs = new List<SimulationGraphBase>();
 
-        private int height = 0;
-        private int width = 0;
+        private int height = 1000;
+        private int width = 1000;
+
+        private float t = 0;
 
         private SKImageInfo imageInfo = new SKImageInfo(1, 1);
 
         public void addGraph(SimulationGraphBase graph)
         {
             graphs.Add(graph);
+        }
+
+        public void loadSimulation(float t, List<ParticleBase> particles, List<EmitterBase> emitters)
+        {
+            this.t = t;
+            foreach(var graph in graphs)
+            {
+                graph.loadSimulationState(particles, emitters);
+            }
         }
 
         public void setHeight(int width, int height)
@@ -41,6 +55,9 @@ namespace ModelScript.Graphs.SimuGraphs
                     graph.render(width, height, ref canvas);
                 }
 
+                canvas.DrawText("t = " + t, 20, 20, new SKPaint() { Color = SKColors.Black, TextSize = 20, Style = SKPaintStyle.Stroke, StrokeWidth=2});
+
+                canvas.Save();
                 return surface.Snapshot();
             }
 

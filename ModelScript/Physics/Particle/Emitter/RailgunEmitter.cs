@@ -9,8 +9,8 @@ namespace ModelScript.Physics.Particle.Emitter
 {
     public class RailgunEmitter : EmitterBase
     {
-        Vector3D position = new Vector3D(0, 0, 0);
-        Vector3D vector = new Vector3D(0, 0, 0);
+        public Vector3D position = new Vector3D(0, 0, 0);
+        public Vector3D vector = new Vector3D(0, 0, 0);
 
         int group = 0;
 
