@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ModelScript.Maths.Numeric.Matrices
+﻿namespace ModelScript.Maths.Numeric.Matrices
 {
     public class Matrix
     {
 
         public float[,] values;
 
-        public int width { get {  return values.GetLength(1); } }
+        public int width { get { return values.GetLength(1); } }
         public int height { get { return values.GetLength(0); } }
 
 
@@ -24,9 +18,9 @@ namespace ModelScript.Maths.Numeric.Matrices
         {
             values = new float[y, x];
 
-            for(int xt = 0; xt < x; xt++)
+            for (int xt = 0; xt < x; xt++)
             {
-                for(int yt = 0; yt < y; yt++)
+                for (int yt = 0; yt < y; yt++)
                 {
                     values[xt, yt] = 0;
                 }
@@ -47,7 +41,7 @@ namespace ModelScript.Maths.Numeric.Matrices
 
         public float getValueClamped(float x, float y, float minX, float maxX, float minY, float maxY)
         {
-            int indexX = (int)((x-minX)/(maxX-minX)) * values.GetLength(0);
+            int indexX = (int)((x - minX) / (maxX - minX)) * values.GetLength(0);
             int indexY = (int)((y - minY) / (maxY - minY)) * values.GetLength(1);
 
             return values[indexY, indexX];

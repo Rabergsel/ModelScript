@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using ModelScript.Maths.Numeric.Vectors;
 
 namespace ModelScript.Physics.Particle
 {
     public class ParticleBase
     {
-        int group = 0;
+        private int group = 0;
         public Dictionary<string, float> attributes = new Dictionary<string, float>();
 
         public Vector3D position;
@@ -25,7 +20,7 @@ namespace ModelScript.Physics.Particle
 
         public Vector3D deltaPosition(float seconds)
         {
-            return (velocity* seconds);
+            return (velocity * seconds);
         }
 
         public void move(Vector3D delta)

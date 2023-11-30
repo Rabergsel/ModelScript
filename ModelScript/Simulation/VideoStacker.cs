@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using FFMpegCore;
 using FFMpegCore.Pipes;
 using SkiaSharp;
@@ -23,7 +18,10 @@ namespace ModelScript.Simulation
             public SKBitmapFrame(SKBitmap bmp)
             {
                 if (bmp.ColorType != SKColorType.Bgra8888)
+                {
                     throw new NotImplementedException("only 'bgra' color type is supported");
+                }
+
                 Source = bmp;
             }
 
@@ -37,7 +35,8 @@ namespace ModelScript.Simulation
                 pipe.WriteAsync(Source.Bytes, 0, Source.Bytes.Length, token);
 
         }
-        static IEnumerable<IVideoFrame> CreateFrames(List<SKImage> images)
+
+        private static IEnumerable<IVideoFrame> CreateFrames(List<SKImage> images)
         {
             for (int i = 0; i < images.Count; i++)
             {

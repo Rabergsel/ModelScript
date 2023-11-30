@@ -1,9 +1,4 @@
 ﻿using SkiaSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ModelScript.Graphs.Graph2D
 {
@@ -18,23 +13,25 @@ namespace ModelScript.Graphs.Graph2D
 
             evaluateBounds();
             evaluateCoords(width, height);
-            
-                using (SKPaint skPaint = new SKPaint())
+
+            using (SKPaint skPaint = new SKPaint())
+            {
+                skPaint.Style = SKPaintStyle.Stroke;
+                skPaint.IsAntialias = true;
+                skPaint.Color = SKColors.Red;
+                skPaint.StrokeWidth = 10;
+                skPaint.StrokeCap = SKStrokeCap.Round;
+
+                foreach (var p in coords)
                 {
-                    skPaint.Style = SKPaintStyle.Stroke;
-                    skPaint.IsAntialias = true;
-                    skPaint.Color = SKColors.Red;
-                    skPaint.StrokeWidth = 10;
-                    skPaint.StrokeCap = SKStrokeCap.Round;
-
-                    foreach(var p in coords)
-                    {
-                        canvas.DrawCircle(p.X, p.Y, 3, skPaint);
-                    }
+                    canvas.DrawCircle(p.X, p.Y, 3, skPaint);
                 }
+            }
 
-            if(drawGrid) makeGrid(ref canvas, width, height);
-
+            if (drawGrid)
+            {
+                makeGrid(ref canvas, width, height);
+            }
         }
 
 

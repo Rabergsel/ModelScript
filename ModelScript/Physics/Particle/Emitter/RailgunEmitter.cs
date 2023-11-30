@@ -1,9 +1,4 @@
 ﻿using ModelScript.Maths.Numeric.Vectors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ModelScript.Physics.Particle.Emitter
 {
@@ -11,8 +6,7 @@ namespace ModelScript.Physics.Particle.Emitter
     {
         public Vector3D position = new Vector3D(0, 0, 0);
         public Vector3D vector = new Vector3D(0, 0, 0);
-
-        int group = 0;
+        private int group = 0;
 
         public override List<ParticleBase> emit()
         {

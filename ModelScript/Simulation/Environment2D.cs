@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ModelScript.Simulation
+﻿namespace ModelScript.Simulation
 {
     public class Environment2D : EnvironmentBase
     {
 
         public override void run(float timespan, float timestep)
         {
-            for(float t = 0; t < timespan; t+=timestep)
+            for (float t = 0; t < timespan; t += timestep)
             {
                 time = t;
                 updateEmitters(t, timestep);
@@ -23,10 +17,10 @@ namespace ModelScript.Simulation
 
         internal override void updateEmitters(float time, float timestep)
         {
-            foreach(var emitter in emitters)
+            foreach (var emitter in emitters)
             {
                 var newParticles = emitter.emit();
-                foreach(var particle in newParticles)
+                foreach (var particle in newParticles)
                 {
                     particles.Add(particle);
                 }
@@ -37,7 +31,7 @@ namespace ModelScript.Simulation
         {
             particleFilter();
 
-            foreach( var particle in particles)
+            foreach (var particle in particles)
             {
                 particle.move(particle.deltaPosition(timestep));
             }
@@ -45,9 +39,12 @@ namespace ModelScript.Simulation
 
         private void particleFilter()
         {
-            for(int i = 0; i < particles.Count; i++)
+            for (int i = 0; i < particles.Count; i++)
             {
-                if (particles[i].position.z != 0) particles.RemoveAt(i);
+                if (particles[i].position.z != 0)
+                {
+                    particles.RemoveAt(i);
+                }
             }
         }
 

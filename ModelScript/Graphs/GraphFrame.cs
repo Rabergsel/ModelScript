@@ -1,15 +1,10 @@
 ﻿using SkiaSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ModelScript.Graphs
 {
     public class GraphFrame
     {
-        List<GraphBase> graphs = new List<GraphBase>();
+        private List<GraphBase> graphs = new List<GraphBase>();
 
         private int height = 0;
         private int width = 0;
@@ -35,7 +30,7 @@ namespace ModelScript.Graphs
             {
                 SKCanvas canvas = surface.Canvas;
 
-                foreach(GraphBase graph in graphs)
+                foreach (GraphBase graph in graphs)
                 {
                     graph.render(width, height, ref canvas);
                 }
@@ -43,7 +38,7 @@ namespace ModelScript.Graphs
                 return surface.Snapshot();
             }
 
-            
+
 
         }
 

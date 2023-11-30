@@ -1,12 +1,6 @@
-﻿using ModelScript;
-using ModelScript.Graphs;
-using ModelScript.Graphs.Graph2D;
-using SkiaSharp;
-using static System.Net.Mime.MediaTypeNames;
-using System.Drawing;
-
-using ModelScript.Simulation;
+﻿
 using ModelScript.Graphs.SimuGraphs;
+using ModelScript.Simulation;
 
 Environment2D world = new Environment2D();
 
