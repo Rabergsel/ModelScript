@@ -10,6 +10,9 @@ namespace ModelScript.Graphs.Graph2D
     public class PointGraph : Graph2DBase
     {
 
+        public bool drawGrid = true;
+
+
         public override void render(int width, int height, ref SKCanvas canvas)
         {
 
@@ -30,9 +33,11 @@ namespace ModelScript.Graphs.Graph2D
                     }
                 }
 
-            
+            if(drawGrid) makeGrid(ref canvas, width, height);
 
         }
+
+
 
     }
 }

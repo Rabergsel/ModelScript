@@ -11,7 +11,7 @@ using ModelScript.Graphs.SimuGraphs;
 Environment2D world = new Environment2D();
 
 var emitter = new ModelScript.Physics.Particle.Emitter.RailgunEmitter();
-emitter.vector = new ModelScript.Maths.Numeric.Vectors.Vector3D(1, 0, 0);
+emitter.vector = new ModelScript.Maths.Numeric.Vectors.Vector3D(1, 1, 0);
 
 world.emitters.Add(emitter);
 

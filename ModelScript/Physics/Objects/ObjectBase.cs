@@ -11,8 +11,8 @@ namespace ModelScript.Physics.Objects
 {
     public abstract class ObjectBase
     {
-        public abstract Vector3D reflect(Vector3D vector);
-
+        public abstract void reflectParticle(ref Particle.ParticleBase particle);
+        public abstract bool isColliding(Vector3D vector);
 
     }
 }

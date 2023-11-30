@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using SkiaSharp;
+
 namespace ModelScript.Graphs.Graph2D
 {
     public abstract class Graph2DBase : GraphBase
@@ -17,6 +19,8 @@ namespace ModelScript.Graphs.Graph2D
         private PointF maxBounds = new PointF(float.MinValue, float.MinValue);
 
         public List<Point> coords = new List<Point>();
+
+        public SKColor originColor = SKColors.Red;
 
         public  void addValue(float x, float y)
         {
@@ -71,6 +75,32 @@ namespace ModelScript.Graphs.Graph2D
              //   Console.WriteLine("Graph2DBase.evaluateCoords(): Mapped ({0}|{1}) to ({2}|{3})", p.X, p.Y, point.X, point.Y);
 
             }
+        }
+
+        internal void makeGrid(ref SKCanvas canvas, int width, int height)
+        {
+
+            //Draw Origin Line
+            using (SKPaint skPaint = new SKPaint())
+            {
+                skPaint.Style = SKPaintStyle.Stroke;
+                skPaint.IsAntialias = true;
+                skPaint.Color = originColor;
+                skPaint.StrokeWidth = 2;
+                skPaint.StrokeCap = SKStrokeCap.Round;
+
+                var origin_X = width * scaler.scale(0, minBounds.X, maxBounds.X);
+                var origin_Y = height* scaler.scale(0, minBounds.Y, maxBounds.Y);
+                if (origin_X > 0 & origin_Y > 0)
+                {
+                    Console.WriteLine("DrawLine: {0}|{1} to {2}|{3}", 0, origin_Y, width, origin_Y);
+                    Console.WriteLine("DrawLine: {0}|{1} to {2}|{3}", origin_X, 0, origin_X, height);
+
+                    canvas.DrawLine(0, origin_Y, width, origin_Y, skPaint);
+                    canvas.DrawLine(origin_X, 0, origin_X, height, skPaint);
+                }
+            }
+
         }
 
 
