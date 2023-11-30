@@ -40,15 +40,15 @@ namespace ModelScript.Physics.Objects
 
             if (alignment == "x") { 
                 diff = minPoint.x - position.x;
-
-                if (diff < vector.x) return false;
+                //Console.WriteLine("diff = {0}\tvector = {1}", diff, vector.x);
+                if (diff > Math.Abs(vector.x)) return false;
                 else return true;
             }
 
             if (alignment == "y") 
             { 
                 diff = minPoint.y - position.y;
-                if (diff < vector.y) return false;
+                if (diff > vector.y) return false;
                 else return true;
             
             }
@@ -57,7 +57,7 @@ namespace ModelScript.Physics.Objects
             { 
                 diff = minPoint.z - position.z;
 
-                if (diff < vector.z) return false;
+                if (diff > vector.z) return false;
                 else return true;
             }
 
@@ -70,14 +70,15 @@ namespace ModelScript.Physics.Objects
 
             var travel = particle.velocity * deltaT;
 
-            if(!isColliding(particle.position, travel))
+           /* if(!isColliding(particle.position, travel))
             {
+                //Console.WriteLine("No collision due to detection!");
 
                 collisionPos = null;
                 remainingWay = null;
                 newVelocity = null;
                 return false;
-            }
+            }*/
 
             float diff = 0f;
             float part = 1f;
@@ -85,6 +86,8 @@ namespace ModelScript.Physics.Objects
             if (alignment == "x") { diff = minPoint.x - particle.position.x; part = diff / travel.x; }
             if (alignment == "y") { diff = minPoint.y - particle.position.y; part = diff / travel.y; }
             if (alignment == "z") { diff = minPoint.z - particle.position.z; part = diff / travel.z; }
+
+            part = Math.Abs(part);
 
             if (part < 0 | part > 1)
             {
@@ -94,6 +97,8 @@ namespace ModelScript.Physics.Objects
                 newVelocity = null;
                 return false;
             }
+            Console.WriteLine("Reflecting: diff = {0}\tpart = {1}", diff, part);
+
             collisionPos = particle.position + (travel * part);
 
             if (alignment == "x") { particle.velocity.x = particle.velocity.x * -1; }
@@ -121,7 +126,7 @@ namespace ModelScript.Physics.Objects
                 var coordY1 = height * scaler.scale(minPoint.y, minCoord.Y, maxCoord.Y);
                 var coordY2 = height * scaler.scale(maxPoint.y, minCoord.Y, maxCoord.Y);
 
-                Console.WriteLine("Plane: Simu Coords {3}|{4} --> {5}|{6}   Visu Coords =  {0}|{1} --> {0}|{2}", coordX, coordY1, coordY2, minCoord.X, minCoord.Y, maxCoord.X, maxCoord.Y);
+               // Console.WriteLine("Plane: Simu Coords {3}|{4} --> {5}|{6}   Visu Coords =  {0}|{1} --> {0}|{2}", coordX, coordY1, coordY2, minCoord.X, minCoord.Y, maxCoord.X, maxCoord.Y);
 
                 using (SKPaint skPaint = new SKPaint())
                 {

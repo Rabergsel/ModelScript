@@ -13,7 +13,7 @@ namespace ModelScript.Graphs.SimuGraphs
         {
             pointGraph.values.Clear();
 
-
+            Console.WriteLine("Number of particles in visu: " + particleList.Count);
 
             foreach (var p in particleList)
             {

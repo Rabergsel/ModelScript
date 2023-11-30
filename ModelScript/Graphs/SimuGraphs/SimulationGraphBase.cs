@@ -11,6 +11,9 @@ namespace ModelScript.Graphs.SimuGraphs
 
         public void loadSimulationState(List<ParticleBase> particles, List<EmitterBase> emitters, List<ObjectBase> objects)
         {
+
+
+
             particleList = particles;
             emitterList = emitters;
             objectList = objects;

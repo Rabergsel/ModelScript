@@ -11,6 +11,8 @@ namespace ModelScript.Graphs.Graph2D
         public PointF minBounds = new PointF(float.MaxValue, float.MaxValue);
         public PointF maxBounds = new PointF(float.MinValue, float.MinValue);
 
+        public bool clearPoints = true;
+
         public List<Point> coords = new List<Point>();
 
         public void addValue(float x, float y)
@@ -52,6 +54,8 @@ namespace ModelScript.Graphs.Graph2D
 
         internal void evaluateCoords(int width, int height)
         {
+            if(clearPoints) coords.Clear();
+
             foreach (var p in values)
             {
                 Point point = new Point();
