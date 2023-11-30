@@ -1,12 +1,11 @@
-﻿
-using ModelScript.Graphs.Graph2D;
+﻿using ModelScript.Graphs.Graph2D;
 using SkiaSharp;
 
 namespace ModelScript.Graphs.SimuGraphs
 {
     public class ParticleGraph : SimulationGraphBase
     {
-        private PointGraph pointGraph = new PointGraph();
+        PointGraph pointGraph = new PointGraph();
 
         public string plane = "XY";
 
@@ -14,23 +13,19 @@ namespace ModelScript.Graphs.SimuGraphs
         {
             pointGraph.values.Clear();
 
+
+
             foreach (var p in particleList)
             {
                 //  Console.WriteLine("Rendering: {0}|{1}|{2} with vector {3}|{4}|{5}", p.position.x, p.position.y, p.position.z, p.velocity.x, p.velocity.y, p.velocity.z);
-                if (plane == "XY")
-                {
-                    pointGraph.addValue(p.position.x, p.position.y);
-                }
+                if (plane == "XY") pointGraph.addValue(p.position.x, p.position.y);
+                if (plane == "YZ") pointGraph.addValue(p.position.y, p.position.z);
+                if (plane == "XZ") pointGraph.addValue(p.position.x, p.position.z);
+            }
 
-                if (plane == "YZ")
-                {
-                    pointGraph.addValue(p.position.y, p.position.z);
-                }
-
-                if (plane == "XZ")
-                {
-                    pointGraph.addValue(p.position.x, p.position.z);
-                }
+            foreach (var o in objectList)
+            {
+                o.visualize(plane, ref canvas, width, height, pointGraph.minBounds, pointGraph.maxBounds);
             }
 
             pointGraph.render(width, height, ref canvas);

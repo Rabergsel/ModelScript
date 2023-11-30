@@ -1,5 +1,4 @@
 ﻿using ModelScript.Graphs.Scaler;
-using SkiaSharp;
 using System.Drawing;
 
 namespace ModelScript.Graphs.Graph2D
@@ -9,12 +8,10 @@ namespace ModelScript.Graphs.Graph2D
         public List<PointF> values = new List<PointF>();
         public ScalerBase scaler = new LinearScaler();
 
-        private PointF minBounds = new PointF(float.MaxValue, float.MaxValue);
-        private PointF maxBounds = new PointF(float.MinValue, float.MinValue);
+        public PointF minBounds = new PointF(float.MaxValue, float.MaxValue);
+        public PointF maxBounds = new PointF(float.MinValue, float.MinValue);
 
         public List<Point> coords = new List<Point>();
-
-        public SKColor originColor = SKColors.Red;
 
         public void addValue(float x, float y)
         {
@@ -31,25 +28,12 @@ namespace ModelScript.Graphs.Graph2D
         {
             foreach (var p in values)
             {
-                if (p.X < minBounds.X)
-                {
-                    minBounds.X = p.X;
-                }
+                if (p.X < minBounds.X) minBounds.X = p.X;
+                if (p.X > maxBounds.X) maxBounds.X = p.X;
 
-                if (p.X > maxBounds.X)
-                {
-                    maxBounds.X = p.X;
-                }
+                if (p.Y < minBounds.Y) minBounds.Y = p.Y;
+                if (p.Y > maxBounds.Y) maxBounds.Y = p.Y;
 
-                if (p.Y < minBounds.Y)
-                {
-                    minBounds.Y = p.Y;
-                }
-
-                if (p.Y > maxBounds.Y)
-                {
-                    maxBounds.Y = p.Y;
-                }
             }
 
             if (minBounds.X == maxBounds.X)
@@ -82,32 +66,6 @@ namespace ModelScript.Graphs.Graph2D
                 //   Console.WriteLine("Graph2DBase.evaluateCoords(): Mapped ({0}|{1}) to ({2}|{3})", p.X, p.Y, point.X, point.Y);
 
             }
-        }
-
-        internal void makeGrid(ref SKCanvas canvas, int width, int height)
-        {
-
-            //Draw Origin Line
-            using (SKPaint skPaint = new SKPaint())
-            {
-                skPaint.Style = SKPaintStyle.Stroke;
-                skPaint.IsAntialias = true;
-                skPaint.Color = originColor;
-                skPaint.StrokeWidth = 2;
-                skPaint.StrokeCap = SKStrokeCap.Round;
-
-                var origin_X = width * scaler.scale(0, minBounds.X, maxBounds.X);
-                var origin_Y = height * scaler.scale(0, minBounds.Y, maxBounds.Y);
-                if (origin_X > 0 & origin_Y > 0)
-                {
-                    Console.WriteLine("DrawLine: {0}|{1} to {2}|{3}", 0, origin_Y, width, origin_Y);
-                    Console.WriteLine("DrawLine: {0}|{1} to {2}|{3}", origin_X, 0, origin_X, height);
-
-                    canvas.DrawLine(0, origin_Y, width, origin_Y, skPaint);
-                    canvas.DrawLine(origin_X, 0, origin_X, height, skPaint);
-                }
-            }
-
         }
 
 

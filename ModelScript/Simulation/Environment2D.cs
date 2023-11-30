@@ -1,4 +1,6 @@
-﻿namespace ModelScript.Simulation
+﻿using ModelScript.Maths.Numeric.Vectors;
+
+namespace ModelScript.Simulation
 {
     public class Environment2D : EnvironmentBase
     {
@@ -31,9 +33,24 @@
         {
             particleFilter();
 
-            foreach (var particle in particles)
+            for (int i = 0; i < particles.Count; i++)
             {
-                particle.move(particle.deltaPosition(timestep));
+                var particle = particles[i];
+                foreach (var obj in objects)
+                {
+                    Vector3D colPos;
+                    Vector3D remain;
+                    Vector3D newVelo;
+                    if (obj.reflectParticle(particle, timestep, out colPos, out remain, out newVelo))
+                    {
+                        particles[i].velocity = newVelo;
+                        particles[i].position = colPos + remain;
+                    }
+                    else
+                    {
+                        particles[i].move(particle.deltaPosition(timestep));
+                    }
+                }
             }
         }
 
@@ -41,10 +58,7 @@
         {
             for (int i = 0; i < particles.Count; i++)
             {
-                if (particles[i].position.z != 0)
-                {
-                    particles.RemoveAt(i);
-                }
+                if (particles[i].position.z != 0) particles.RemoveAt(i);
             }
         }
 

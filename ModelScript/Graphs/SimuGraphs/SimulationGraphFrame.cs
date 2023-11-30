@@ -1,4 +1,4 @@
-﻿
+﻿using ModelScript.Physics.Objects;
 using ModelScript.Physics.Particle;
 using ModelScript.Physics.Particle.Emitter;
 using SkiaSharp;
@@ -7,7 +7,7 @@ namespace ModelScript.Graphs.SimuGraphs
 {
     public class SimulationGraphFrame
     {
-        private List<SimulationGraphBase> graphs = new List<SimulationGraphBase>();
+        List<SimulationGraphBase> graphs = new List<SimulationGraphBase>();
 
         private int height = 1000;
         private int width = 1000;
@@ -21,12 +21,12 @@ namespace ModelScript.Graphs.SimuGraphs
             graphs.Add(graph);
         }
 
-        public void loadSimulation(float t, List<ParticleBase> particles, List<EmitterBase> emitters)
+        public void loadSimulation(float t, List<ParticleBase> particles, List<EmitterBase> emitters, List<ObjectBase> objects)
         {
             this.t = t;
             foreach (var graph in graphs)
             {
-                graph.loadSimulationState(particles, emitters);
+                graph.loadSimulationState(particles, emitters, objects);
             }
         }
 
@@ -52,6 +52,9 @@ namespace ModelScript.Graphs.SimuGraphs
                 canvas.DrawText("t = " + t, 20, 20, new SKPaint() { Color = SKColors.Black, TextSize = 20, Style = SKPaintStyle.Stroke, StrokeWidth = 2 });
 
                 canvas.Save();
+
+               
+
                 return surface.Snapshot();
             }
 

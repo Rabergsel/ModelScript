@@ -4,7 +4,7 @@ namespace ModelScript.Graphs
 {
     public class GraphFrame
     {
-        private List<GraphBase> graphs = new List<GraphBase>();
+        List<GraphBase> graphs = new List<GraphBase>();
 
         private int height = 0;
         private int width = 0;

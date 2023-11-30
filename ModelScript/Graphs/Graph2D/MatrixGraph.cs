@@ -6,8 +6,9 @@ namespace ModelScript.Graphs.Graph2D
 {
     public class MatrixGraph : GraphBase
     {
-        private Matrix values;
-        private GradientBase gradient;
+
+        Matrix values;
+        GradientBase gradient;
 
         public MatrixGraph(Matrix values, GradientBase gradient)
         {

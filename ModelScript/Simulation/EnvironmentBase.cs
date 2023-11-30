@@ -1,4 +1,5 @@
 ﻿using ModelScript.Graphs.SimuGraphs;
+using ModelScript.Physics.Objects;
 using ModelScript.Physics.Particle;
 using ModelScript.Physics.Particle.Emitter;
 using SkiaSharp;
@@ -14,6 +15,7 @@ namespace ModelScript.Simulation
 
         public List<ParticleBase> particles = new List<ParticleBase>();
         public List<EmitterBase> emitters = new List<EmitterBase>();
+        public List<ObjectBase> objects = new List<ObjectBase>();
 
         public abstract void run(float timespan, float timestep);
 
@@ -26,12 +28,8 @@ namespace ModelScript.Simulation
         {
             for (int i = 0; i < visus.Count; i++)
             {
-                if (images.Count <= i)
-                {
-                    images.Add(new List<SKImage>());
-                }
-
-                visus[i].loadSimulation(time, particles, emitters);
+                if (images.Count <= i) images.Add(new List<SKImage>());
+                visus[i].loadSimulation(time, particles, emitters, objects);
                 images[i].Add(visus[i].render());
             }
         }

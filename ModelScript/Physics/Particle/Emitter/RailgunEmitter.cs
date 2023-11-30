@@ -6,7 +6,8 @@ namespace ModelScript.Physics.Particle.Emitter
     {
         public Vector3D position = new Vector3D(0, 0, 0);
         public Vector3D vector = new Vector3D(0, 0, 0);
-        private int group = 0;
+
+        int group = 0;
 
         public override List<ParticleBase> emit()
         {

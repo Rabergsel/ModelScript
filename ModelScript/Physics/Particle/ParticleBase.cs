@@ -1,11 +1,10 @@
-﻿
-using ModelScript.Maths.Numeric.Vectors;
+﻿using ModelScript.Maths.Numeric.Vectors;
 
 namespace ModelScript.Physics.Particle
 {
     public class ParticleBase
     {
-        private int group = 0;
+        int group = 0;
         public Dictionary<string, float> attributes = new Dictionary<string, float>();
 
         public Vector3D position;
