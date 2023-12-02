@@ -4,7 +4,7 @@ namespace ModelScript.Physics.Particle
 {
     public class ParticleBase
     {
-        int group = 0;
+        private int group = 0;
         public Dictionary<string, float> attributes = new Dictionary<string, float>();
 
         public Vector3D position;
@@ -36,7 +36,7 @@ namespace ModelScript.Physics.Particle
             move(deltaPosition(deltaT));
         }
 
-        
+
 
 
     }

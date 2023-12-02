@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using ModelScript.Maths.Numeric.Vectors;
 
 namespace ModelScript.Physics.Particle.Emitter
@@ -22,12 +17,12 @@ namespace ModelScript.Physics.Particle.Emitter
 
         public override List<ParticleBase> emit()
         {
-            
-            if(actualEmissions < activations)
+
+            if (actualEmissions < activations)
             {
                 List<ParticleBase> parts = new List<ParticleBase>();
 
-                for(float i = 0; i <= amount; i++)
+                for (float i = 0; i <= amount; i++)
                 {
                     var velocity = new Vector3D(i * (1 / amount), (float)Math.Sqrt(1 - Math.Pow(i * (1 / amount), 2)), 0);
                     var velocity2 = new Vector3D(velocity.x, -velocity.y, 0);

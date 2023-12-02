@@ -18,10 +18,10 @@ namespace ModelScript.Graphs.SimuGraphs
 
         public void clearSimulationState()
         {
-                objectList.Clear();
-                particleList.Clear();
-                emitterList.Clear();
-            
+            objectList.Clear();
+            particleList.Clear();
+            emitterList.Clear();
+
         }
 
     }

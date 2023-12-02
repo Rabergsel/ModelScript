@@ -10,7 +10,7 @@ namespace ModelScript.Physics.Objects
     {
         public Vector3D minPoint = new Vector3D(0, 0, 0);
         public Vector3D maxPoint = new Vector3D(0, 0, 0);
-        string alignment = "a";
+        private string alignment = "a";
 
         public AlignedPlane(Vector3D minPoint, Vector3D maxPoint)
         {
@@ -26,39 +26,70 @@ namespace ModelScript.Physics.Objects
             this.minPoint = min;
             this.maxPoint = max;
 
-            if (minPoint.x == maxPoint.x) alignment = "x";
-            if (minPoint.y == maxPoint.y) alignment = "y";
-            if (minPoint.z == maxPoint.z) alignment = "z";
+            if (minPoint.x == maxPoint.x)
+            {
+                alignment = "x";
+            }
 
-            if (alignment == "a") throw new Exception("No aligned plane can be generated with those coordinates.");
+            if (minPoint.y == maxPoint.y)
+            {
+                alignment = "y";
+            }
 
+            if (minPoint.z == maxPoint.z)
+            {
+                alignment = "z";
+            }
+
+            if (alignment == "a")
+            {
+                throw new Exception("No aligned plane can be generated with those coordinates.");
+            }
         }
 
         public override bool isColliding(Vector3D position, Vector3D vector)
         {
             var diff = 0f;
 
-            if (alignment == "x") { 
+            if (alignment == "x")
+            {
                 diff = minPoint.x - position.x;
                 //Console.WriteLine("diff = {0}\tvector = {1}", diff, vector.x);
-                if (diff > Math.Abs(vector.x)) return false;
-                else return true;
+                if (diff > Math.Abs(vector.x))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
 
-            if (alignment == "y") 
-            { 
+            if (alignment == "y")
+            {
                 diff = minPoint.y - position.y;
-                if (diff > vector.y) return false;
-                else return true;
-            
+                if (diff > vector.y)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
 
-            if (alignment == "z") 
-            { 
+            if (alignment == "z")
+            {
                 diff = minPoint.z - position.z;
 
-                if (diff > vector.z) return false;
-                else return true;
+                if (diff > vector.z)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
 
             throw new Exception("Invalid alignment of plane");
@@ -95,10 +126,20 @@ namespace ModelScript.Physics.Objects
 
             collisionPos = particle.position + (travel * part);
 
-            if (alignment == "x" & !isWithinBounds(collisionPos.y, minPoint.y, maxPoint.y, "y") | !isWithinBounds(collisionPos.z, minPoint.z, maxPoint.z, "z")) return false;
-            if (alignment == "y" & !isWithinBounds(collisionPos.x, minPoint.x, maxPoint.x, "x") | !isWithinBounds(collisionPos.z, minPoint.z, maxPoint.z, "z")) return false;
-            if (alignment == "z" & !isWithinBounds(collisionPos.x, minPoint.x, maxPoint.x, "x") | !isWithinBounds(collisionPos.y, minPoint.y, maxPoint.y, "y")) return false;
+            if (alignment == "x" & !isWithinBounds(collisionPos.y, minPoint.y, maxPoint.y, "y") | !isWithinBounds(collisionPos.z, minPoint.z, maxPoint.z, "z"))
+            {
+                return false;
+            }
 
+            if (alignment == "y" & !isWithinBounds(collisionPos.x, minPoint.x, maxPoint.x, "x") | !isWithinBounds(collisionPos.z, minPoint.z, maxPoint.z, "z"))
+            {
+                return false;
+            }
+
+            if (alignment == "z" & !isWithinBounds(collisionPos.x, minPoint.x, maxPoint.x, "x") | !isWithinBounds(collisionPos.y, minPoint.y, maxPoint.y, "y"))
+            {
+                return false;
+            }
 
             if (alignment == "x") { particle.velocity.x = particle.velocity.x * -1; }
             if (alignment == "y") { particle.velocity.y = particle.velocity.y * -1; }
@@ -124,14 +165,14 @@ namespace ModelScript.Physics.Objects
         {
             var scaler = new LinearScaler();
 
-            if(this.alignment == "x" & alignment == "XY")
+            if (this.alignment == "x" & alignment == "XY")
             {
                 var coordX = width * scaler.scale(minPoint.x, minCoord.X, maxCoord.X);
 
                 var coordY1 = height * scaler.scale(minPoint.y, minCoord.Y, maxCoord.Y);
                 var coordY2 = height * scaler.scale(maxPoint.y, minCoord.Y, maxCoord.Y);
 
-               // Console.WriteLine("Plane: Simu Coords {3}|{4} --> {5}|{6}   Visu Coords =  {0}|{1} --> {0}|{2}", coordX, coordY1, coordY2, minCoord.X, minCoord.Y, maxCoord.X, maxCoord.Y);
+                // Console.WriteLine("Plane: Simu Coords {3}|{4} --> {5}|{6}   Visu Coords =  {0}|{1} --> {0}|{2}", coordX, coordY1, coordY2, minCoord.X, minCoord.Y, maxCoord.X, maxCoord.Y);
 
                 using (SKPaint skPaint = new SKPaint())
                 {
@@ -140,8 +181,8 @@ namespace ModelScript.Physics.Objects
                     skPaint.Color = SKColors.Blue;
                     skPaint.StrokeWidth = 5;
                     skPaint.StrokeCap = SKStrokeCap.Round;
-                 canvas.DrawLine(coordX, coordY1, coordX, coordY2, skPaint);
-                    
+                    canvas.DrawLine(coordX, coordY1, coordX, coordY2, skPaint);
+
                 }
             }
 

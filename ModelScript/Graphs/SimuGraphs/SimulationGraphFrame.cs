@@ -2,13 +2,12 @@
 using ModelScript.Physics.Particle;
 using ModelScript.Physics.Particle.Emitter;
 using SkiaSharp;
-using System.Numerics;
 
 namespace ModelScript.Graphs.SimuGraphs
 {
     public class SimulationGraphFrame
     {
-        List<SimulationGraphBase> graphs = new List<SimulationGraphBase>();
+        private List<SimulationGraphBase> graphs = new List<SimulationGraphBase>();
 
         public bool deleteStateAfterRender = true;
 
@@ -28,7 +27,7 @@ namespace ModelScript.Graphs.SimuGraphs
         public void loadSimulation(float t, List<ParticleBase> particles, List<EmitterBase> emitters, List<ObjectBase> objects)
         {
             this.t = t;
-            this.p = particles.Count;
+            p = particles.Count;
             foreach (var graph in graphs)
             {
                 graph.loadSimulationState(particles, emitters, objects);
@@ -57,7 +56,7 @@ namespace ModelScript.Graphs.SimuGraphs
             {
                 SKCanvas canvas = surface.Canvas;
 
-                canvas.DrawRect(0,0, width, height, new SKPaint()
+                canvas.DrawRect(0, 0, width, height, new SKPaint()
                 {
                     TextSize = 10,
                     Color = SKColors.DarkGray,

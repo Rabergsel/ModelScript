@@ -1,10 +1,10 @@
 ﻿using ModelScript.Graphs.SimuGraphs;
-using ModelScript.Simulation;
 using ModelScript.Physics.Objects;
+using ModelScript.Simulation;
 
 Environment2D world = new Environment2D();
 
-var emitter = new ModelScript.Physics.Particle.Emitter.Circle2DEmitter() {amount = 1000, activations = 20};
+var emitter = new ModelScript.Physics.Particle.Emitter.Circle2DEmitter() { amount = 1000, activations = 20 };
 //emitter.vector = new ModelScript.Maths.Numeric.Vectors.Vector3D(0f, 1f, 0);
 emitter.position = new ModelScript.Maths.Numeric.Vectors.Vector3D(0, 0, 0);
 

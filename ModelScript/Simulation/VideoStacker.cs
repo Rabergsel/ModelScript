@@ -17,7 +17,10 @@ namespace ModelScript.Simulation
             public SKBitmapFrame(SKBitmap bmp)
             {
                 if (bmp.ColorType != SKColorType.Bgra8888)
+                {
                     throw new NotImplementedException("only 'bgra' color type is supported");
+                }
+
                 Source = bmp;
             }
 

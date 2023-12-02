@@ -4,7 +4,7 @@ namespace ModelScript.Physics.Particle.Emitter
 {
     public abstract class EmitterBase
     {
-        Vector3D position;
+        private Vector3D position;
 
         public abstract List<ParticleBase> emit();
 

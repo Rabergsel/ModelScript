@@ -67,7 +67,7 @@ namespace ModelScript.Simulation
                     }
                 }
 
-                if(!collision)
+                if (!collision)
                 {
                     //Console.WriteLine("No collision");
                     particles[i].move(particle.deltaPosition(timestep));
@@ -79,7 +79,10 @@ namespace ModelScript.Simulation
         {
             for (int i = 0; i < particles.Count; i++)
             {
-                if (particles[i].position.z != 0) particles.RemoveAt(i);
+                if (particles[i].position.z != 0)
+                {
+                    particles.RemoveAt(i);
+                }
             }
         }
 
