@@ -4,8 +4,10 @@ using ModelScript.Physics.Objects;
 
 Environment2D world = new Environment2D();
 
-var emitter = new ModelScript.Physics.Particle.Emitter.RailgunEmitter();
-emitter.vector = new ModelScript.Maths.Numeric.Vectors.Vector3D(2.0f, 0.1f, 0);
+var emitter = new ModelScript.Physics.Particle.Emitter.Circle2DEmitter() {amount = 1000, activations = 20};
+//emitter.vector = new ModelScript.Maths.Numeric.Vectors.Vector3D(0f, 1f, 0);
+emitter.position = new ModelScript.Maths.Numeric.Vectors.Vector3D(0, 0, 0);
+
 
 world.emitters.Add(emitter);
 
@@ -16,13 +18,17 @@ world.visus.Add(visu);
 
 var wall1 = new AlignedPlane(new ModelScript.Maths.Numeric.Vectors.Vector3D(5, -10, -10), new ModelScript.Maths.Numeric.Vectors.Vector3D(5, 10, 10));
 var wall2 = new AlignedPlane(new ModelScript.Maths.Numeric.Vectors.Vector3D(-5, -10, -10), new ModelScript.Maths.Numeric.Vectors.Vector3D(-5, 10, 10));
+var wall3 = new AlignedPlane(new ModelScript.Maths.Numeric.Vectors.Vector3D(-15, 25, -10), new ModelScript.Maths.Numeric.Vectors.Vector3D(15, 25, 10));
+var wall4 = new AlignedPlane(new ModelScript.Maths.Numeric.Vectors.Vector3D(-20, -25, -10), new ModelScript.Maths.Numeric.Vectors.Vector3D(-20, 25, 10));
 
 world.objects.Add(wall1);
 world.objects.Add(wall2);
+world.objects.Add(wall3);
 
-world.run(10, 0.05f);
+world.run(100, 0.9f);
 
-VideoStacker.makeVideo(world.images[0]);
+VideoStacker.makeVideo(world.images[0], 24);
+
 
 
 /*

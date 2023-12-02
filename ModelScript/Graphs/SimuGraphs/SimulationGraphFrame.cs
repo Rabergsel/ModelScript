@@ -10,10 +10,13 @@ namespace ModelScript.Graphs.SimuGraphs
     {
         List<SimulationGraphBase> graphs = new List<SimulationGraphBase>();
 
+        public bool deleteStateAfterRender = true;
+
         private int height = 1000;
         private int width = 1000;
 
         private float t = 0;
+        private int p = 0;
 
         private SKImageInfo imageInfo = new SKImageInfo(1, 1);
 
@@ -25,9 +28,18 @@ namespace ModelScript.Graphs.SimuGraphs
         public void loadSimulation(float t, List<ParticleBase> particles, List<EmitterBase> emitters, List<ObjectBase> objects)
         {
             this.t = t;
+            this.p = particles.Count;
             foreach (var graph in graphs)
             {
                 graph.loadSimulationState(particles, emitters, objects);
+            }
+        }
+
+        public void clearSimulation()
+        {
+            foreach (var graph in graphs)
+            {
+                graph.clearSimulationState();
             }
         }
 
@@ -58,11 +70,10 @@ namespace ModelScript.Graphs.SimuGraphs
                     graph.render(width, height, ref canvas);
                 }
 
-                canvas.DrawText("t = " + t, 20, 20, new SKPaint() { Color = SKColors.Beige, TextSize = 20, Style = SKPaintStyle.Stroke, StrokeWidth = 2 });
+                canvas.DrawText("t = " + t + "\n#p = " + p, 20, 20, new SKPaint() { Color = SKColors.Beige, TextSize = 20, Style = SKPaintStyle.Stroke, StrokeWidth = 2 });
 
                 canvas.Save();
 
-               
 
                 return surface.Snapshot();
             }

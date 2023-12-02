@@ -51,6 +51,11 @@
             return new Vector3D(v1.x / v2, v1.y / v2, v1.z / v2);
         }
 
+        public override string ToString()
+        {
+            return String.Format("({0}|{1}|{2})", x, y, z);
+        }
+
 
     }
 }

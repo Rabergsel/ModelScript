@@ -35,21 +35,42 @@ namespace ModelScript.Simulation
 
             for (int i = 0; i < particles.Count; i++)
             {
+
+
                 var particle = particles[i];
+
+
+
+                bool collision = false;
+
                 foreach (var obj in objects)
                 {
                     Vector3D colPos;
                     Vector3D remain;
                     Vector3D newVelo;
+
                     if (obj.reflectParticle(particle, timestep, out colPos, out remain, out newVelo))
                     {
                         particles[i].velocity = newVelo;
                         particles[i].position = colPos + remain;
+
+                        //Console.Write("Particle #{0}\t", i);
+                        //Console.Write("Current Pos = {0}\t", particle.position.ToString());
+                        //Console.Write("Current Vel = {0}\n", particle.velocity.ToString());
+                        //Console.WriteLine("Collided; colPos = {0}\tremain = {1}\tnewVelo = {2}", colPos, remain, newVelo);
+                        collision = true;
+                        break;
                     }
                     else
                     {
-                        particles[i].move(particle.deltaPosition(timestep));
+
                     }
+                }
+
+                if(!collision)
+                {
+                    //Console.WriteLine("No collision");
+                    particles[i].move(particle.deltaPosition(timestep));
                 }
             }
         }

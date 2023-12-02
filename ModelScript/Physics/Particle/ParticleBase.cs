@@ -19,18 +19,24 @@ namespace ModelScript.Physics.Particle
 
         public Vector3D deltaPosition(float seconds)
         {
+            //Console.WriteLine("delta Pos = {0}\t dt = {1}", velocity * seconds, seconds);
+
             return (velocity * seconds);
         }
 
         public void move(Vector3D delta)
         {
+            //Console.Write("Pos before: {0}\t delta = ", position.ToString(), delta.ToString());
             position += delta;
+            //Console.WriteLine("Pos after: {0}", position.ToString());
         }
 
         public virtual void onTimestep(float t, float deltaT)
         {
             move(deltaPosition(deltaT));
         }
+
+        
 
 
     }

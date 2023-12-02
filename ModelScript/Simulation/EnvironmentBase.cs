@@ -4,6 +4,9 @@ using ModelScript.Physics.Particle;
 using ModelScript.Physics.Particle.Emitter;
 using SkiaSharp;
 
+using FFMpegCore;
+using FFMpegCore.Pipes;
+
 namespace ModelScript.Simulation
 {
     public abstract class EnvironmentBase
@@ -30,7 +33,11 @@ namespace ModelScript.Simulation
             {
                 if (images.Count <= i) images.Add(new List<SKImage>());
                 visus[i].loadSimulation(time, particles, emitters, objects);
-                images[i].Add(visus[i].render());
+                var render = visus[i].render();
+                images[i].Add(render);
+
+                visus[i].clearSimulation();
+
             }
         }
 

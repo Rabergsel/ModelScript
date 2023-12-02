@@ -70,15 +70,9 @@ namespace ModelScript.Physics.Objects
 
             var travel = particle.velocity * deltaT;
 
-           /* if(!isColliding(particle.position, travel))
-            {
-                //Console.WriteLine("No collision due to detection!");
-
-                collisionPos = null;
-                remainingWay = null;
-                newVelocity = null;
-                return false;
-            }*/
+            collisionPos = null;
+            remainingWay = null;
+            newVelocity = null;
 
             float diff = 0f;
             float part = 1f;
@@ -97,9 +91,14 @@ namespace ModelScript.Physics.Objects
                 newVelocity = null;
                 return false;
             }
-            Console.WriteLine("Reflecting: diff = {0}\tpart = {1}", diff, part);
+            //Console.WriteLine("Reflecting: diff = {0}\tpart = {1}", diff, part);
 
             collisionPos = particle.position + (travel * part);
+
+            if (alignment == "x" & !isWithinBounds(collisionPos.y, minPoint.y, maxPoint.y, "y") | !isWithinBounds(collisionPos.z, minPoint.z, maxPoint.z, "z")) return false;
+            if (alignment == "y" & !isWithinBounds(collisionPos.x, minPoint.x, maxPoint.x, "x") | !isWithinBounds(collisionPos.z, minPoint.z, maxPoint.z, "z")) return false;
+            if (alignment == "z" & !isWithinBounds(collisionPos.x, minPoint.x, maxPoint.x, "x") | !isWithinBounds(collisionPos.y, minPoint.y, maxPoint.y, "y")) return false;
+
 
             if (alignment == "x") { particle.velocity.x = particle.velocity.x * -1; }
             if (alignment == "y") { particle.velocity.y = particle.velocity.y * -1; }
@@ -113,6 +112,12 @@ namespace ModelScript.Physics.Objects
 
             return true;
 
+        }
+
+        private bool isWithinBounds(float value, float min, float max, string debuginfo = "")
+        {
+            //Console.WriteLine("Checking {4} {0}<{1}<{2} = {3}", min, value, max, (value >= min) & (value <= max), debuginfo);
+            return (value >= min) & (value <= max);
         }
 
         public override void visualize(string alignment, ref SKCanvas canvas, int width, int height, PointF minCoord, PointF maxCoord)
@@ -137,6 +142,27 @@ namespace ModelScript.Physics.Objects
                     skPaint.StrokeCap = SKStrokeCap.Round;
                  canvas.DrawLine(coordX, coordY1, coordX, coordY2, skPaint);
                     
+                }
+            }
+
+            if (this.alignment == "y" & alignment == "XY")
+            {
+                var coordX1 = width * scaler.scale(minPoint.x, minCoord.X, maxCoord.X);
+                var coordX2 = width * scaler.scale(maxPoint.x, minCoord.X, maxCoord.X);
+
+                var coordY = height - (height * scaler.scale(minPoint.y, minCoord.Y, maxCoord.Y));
+
+                // Console.WriteLine("Plane: Simu Coords {3}|{4} --> {5}|{6}   Visu Coords =  {0}|{1} --> {0}|{2}", coordX, coordY1, coordY2, minCoord.X, minCoord.Y, maxCoord.X, maxCoord.Y);
+
+                using (SKPaint skPaint = new SKPaint())
+                {
+                    skPaint.Style = SKPaintStyle.Stroke;
+                    skPaint.IsAntialias = true;
+                    skPaint.Color = SKColors.Blue;
+                    skPaint.StrokeWidth = 5;
+                    skPaint.StrokeCap = SKStrokeCap.Round;
+                    canvas.DrawLine(coordX1, coordY, coordX2, coordY, skPaint);
+
                 }
             }
         }

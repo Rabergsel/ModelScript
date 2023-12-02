@@ -31,7 +31,7 @@ namespace ModelScript.Simulation
                 pipe.WriteAsync(Source.Bytes, 0, Source.Bytes.Length, token);
 
         }
-        static IEnumerable<IVideoFrame> CreateFrames(List<SKImage> images)
+        public static IEnumerable<IVideoFrame> CreateFrames(List<SKImage> images)
         {
             for (int i = 0; i < images.Count; i++)
             {

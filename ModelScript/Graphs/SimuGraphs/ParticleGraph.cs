@@ -7,13 +7,15 @@ namespace ModelScript.Graphs.SimuGraphs
     {
         PointGraph pointGraph = new PointGraph();
 
+
+
         public string plane = "XY";
 
         public override void render(int width, int height, ref SKCanvas canvas)
         {
             pointGraph.values.Clear();
 
-            Console.WriteLine("Number of particles in visu: " + particleList.Count);
+           // Console.WriteLine("Number of particles in visu: " + particleList.Count);
 
             foreach (var p in particleList)
             {

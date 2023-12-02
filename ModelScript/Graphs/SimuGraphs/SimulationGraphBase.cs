@@ -5,18 +5,23 @@ namespace ModelScript.Graphs.SimuGraphs
 {
     public abstract class SimulationGraphBase : GraphBase
     {
-        internal List<ParticleBase> particleList;
-        internal List<EmitterBase> emitterList;
-        internal List<ObjectBase> objectList;
+        internal List<ParticleBase> particleList = new List<ParticleBase>();
+        internal List<EmitterBase> emitterList = new List<EmitterBase>();
+        internal List<ObjectBase> objectList = new List<ObjectBase>();
 
         public void loadSimulationState(List<ParticleBase> particles, List<EmitterBase> emitters, List<ObjectBase> objects)
         {
+            particleList.AddRange(particles.ToArray());
+            emitterList.AddRange(emitters.ToArray());
+            objectList.AddRange(objects.ToArray());
+        }
 
-
-
-            particleList = particles;
-            emitterList = emitters;
-            objectList = objects;
+        public void clearSimulationState()
+        {
+                objectList.Clear();
+                particleList.Clear();
+                emitterList.Clear();
+            
         }
 
     }
