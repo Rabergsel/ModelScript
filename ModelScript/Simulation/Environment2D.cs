@@ -7,13 +7,24 @@ namespace ModelScript.Simulation
 
         public override void run(float timespan, float timestep)
         {
+            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
             for (float t = 0; t < timespan; t += timestep)
             {
+                
                 time = t;
                 updateEmitters(t, timestep);
                 updateParticles(t, timestep);
                 renderVisus();
-                Console.WriteLine("t = {0}\t#part = {1}", time, particles.Count);
+                try
+                {
+                    var eta = (1 - (t / timespan)) / (t / timespan) * stopwatch.Elapsed;
+                    Console.WriteLine("t = {0}\t#part = {1}\tETA: {2}", time, particles.Count, eta);
+                }
+                catch
+                {
+                    Console.WriteLine("t = {0}\t#part = {1}", time, particles.Count);
+                }
+                
             }
         }
 

@@ -6,8 +6,13 @@ namespace ModelScript.Graphs.Graph2D
 {
     public class MatrixGraph : GraphBase
     {
-        private Matrix values;
-        private GradientBase gradient;
+        public Matrix values = new Matrix(2, 2);
+        public GradientBase gradient;
+
+        public void setMatrix(Matrix matrix)
+        {
+            this.values = matrix;
+        }
 
         public MatrixGraph(Matrix values, GradientBase gradient)
         {
@@ -42,15 +47,14 @@ namespace ModelScript.Graphs.Graph2D
                 {
                     using (SKPaint skPaint = new SKPaint())
                     {
-                        var rgb = gradient.getRGB(values.getValue(x, y));
+                        var rgb = gradient.getClampedRGB(values.getValue(x, y), min, max);
 
                         skPaint.Style = SKPaintStyle.Fill;
                         skPaint.IsAntialias = true;
-                        skPaint.Color = new SKColor((byte)rgb.Item1, (byte)rgb.Item2, (byte)rgb.Item3);
+                        skPaint.Color = new SKColor((byte)rgb.Item1, (byte)rgb.Item2, (byte)rgb.Item3, (byte) rgb.Item4);
+                        //Console.WriteLine("Value = {4}\t (x|y) = ({5}|{6})\t min = ({7}|{8}) \tColor = {0} | {1} | {2} | {3}", rgb.Item1, rgb.Item2, rgb.Item3, rgb.Item4, values.getValue(x, y), x, y, min, max);
                         skPaint.StrokeWidth = 10;
                         skPaint.StrokeCap = SKStrokeCap.Round;
-
-
 
                         canvas.DrawRect(x * fieldwidth, y * fieldheight, fieldwidth, fieldheight, skPaint);
 

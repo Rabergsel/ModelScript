@@ -56,17 +56,19 @@ namespace ModelScript.Graphs.SimuGraphs
             {
                 SKCanvas canvas = surface.Canvas;
 
-                canvas.DrawRect(0, 0, width, height, new SKPaint()
+              /*  canvas.DrawRect(0, 0, width, height, new SKPaint()
                 {
                     TextSize = 10,
                     Color = SKColors.DarkGray,
                     Style = SKPaintStyle.Fill,
                     StrokeWidth = 2
                 });
+              */
 
                 foreach (GraphBase graph in graphs)
                 {
                     graph.render(width, height, ref canvas);
+                    canvas.Save();
                 }
 
                 canvas.DrawText("t = " + t + "\n#p = " + p, 20, 20, new SKPaint() { Color = SKColors.Beige, TextSize = 20, Style = SKPaintStyle.Stroke, StrokeWidth = 2 });

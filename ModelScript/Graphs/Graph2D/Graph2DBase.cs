@@ -26,7 +26,7 @@ namespace ModelScript.Graphs.Graph2D
             values.Add(pointF);
         }
 
-        internal void evaluateBounds(float factor = 1.3f)
+        internal void evaluateBounds(float factor = 1.05f)
         {
             foreach (var p in values)
             {
