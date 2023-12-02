@@ -2,10 +2,11 @@
 using ModelScript.Graphs.Utilities.Gradients;
 using ModelScript.Physics.Objects;
 using ModelScript.Simulation;
+using ModelScript.Physics.Particle;
 
 Environment2D world = new Environment2D();
 
-var emitter = new ModelScript.Physics.Particle.Emitter.Circle2DEmitter() { amount = 1000, activations = 5 };
+var emitter = new ModelScript.Physics.Particle.Emitter.Circle2DEmitter() { amount = 100, activations = 5, particle = new SquareDeflatingParticle(1f, 1f) };
 //emitter.vector = new ModelScript.Maths.Numeric.Vectors.Vector3D(0f, 1f, 0);
 emitter.position = new ModelScript.Maths.Numeric.Vectors.Vector3D(0, 0, 0);
 
@@ -20,19 +21,21 @@ world.visus.Add(visu);
 
 
 var visu2 = new SimulationGraphFrame();
-visu2.addGraph(new FieldGraph() { gradient = new BWGradient(128), matrixHeight = 30, matrixWidth = 30 });
+visu2.addGraph(new FieldGraph() { gradient = new BWGradient(128), matrixHeight = 5, matrixWidth = 5, attribute = "amplitude" });
 visu2.setHeight(500, 500);
 world.visus.Add(visu2);
+
 
 var wall1 = new AlignedPlane(new ModelScript.Maths.Numeric.Vectors.Vector3D(5, -10, -10), new ModelScript.Maths.Numeric.Vectors.Vector3D(5, 10, 10));
 var wall2 = new AlignedPlane(new ModelScript.Maths.Numeric.Vectors.Vector3D(-5, -10, -10), new ModelScript.Maths.Numeric.Vectors.Vector3D(-5, 10, 10));
 var wall3 = new AlignedPlane(new ModelScript.Maths.Numeric.Vectors.Vector3D(-15, 25, -10), new ModelScript.Maths.Numeric.Vectors.Vector3D(15, 25, 10));
-var wall4 = new AlignedPlane(new ModelScript.Maths.Numeric.Vectors.Vector3D(-20, -25, -10), new ModelScript.Maths.Numeric.Vectors.Vector3D(-20, 25, 10));
+
+var square = new AlignedSquare(-50, -50, 100, 100);
 
 world.objects.Add(wall1);
 world.objects.Add(wall2);
 world.objects.Add(wall3);
-//world.objects.Add(wall4);
+world.objects.Add(square);
 
 world.run(100, 0.9f);
 

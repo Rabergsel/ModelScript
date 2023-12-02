@@ -58,9 +58,22 @@ namespace ModelScript.Graphs.SimuGraphs
                         if (plane[1] == 'Y') val2 = matrixHeight - (int)((p.position.y - minPoint.y) / matrixheight);
                         if (plane[1] == 'Z') val2 = matrixHeight - (int)((p.position.z - minPoint.z) / matrixheight);
 
+                        
 
-                        matrix.setValue(val1, val2, matrix.getValue(val1, val2) + 1);
-                        //Console.WriteLine("Particle @ {0} got index ({1}|{2})\t#part at that index is {3}", p.position, val1, val2, matrix.getValue(val1, val2));
+
+                        try
+                        {
+                            Console.WriteLine("Particle @ {0} got index ({1}|{2})\t#part at that index is {3}", p.position, val1, val2, matrix.getValue(val1, val2));
+
+
+                            if (attribute == "") matrix.setValue(val1, val2, matrix.getValue(val1, val2) + 1);
+                          else matrix.setValue(val1, val2, matrix.getValue(val1, val2) + p.attributes[attribute]);
+                        }
+                        catch(Exception ex)
+                        {
+                            Console.WriteLine("Particle @ {0} got index ({1}|{2})\t#part at that index is [ERROR]", p.position, val1, val2);
+
+                        }
 
                     }
 
@@ -75,6 +88,7 @@ namespace ModelScript.Graphs.SimuGraphs
 
 
         }
+
 
 
     }

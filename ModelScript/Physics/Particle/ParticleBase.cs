@@ -36,7 +36,7 @@ namespace ModelScript.Physics.Particle
             move(deltaPosition(deltaT));
         }
 
-
+        public ParticleBase() { }
 
 
     }

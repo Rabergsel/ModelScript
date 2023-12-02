@@ -9,9 +9,11 @@ namespace ModelScript.Physics.Particle.Emitter
         public int activations = 2;
         public float speed = 1f;
 
-        public Vector3D position;
+        public Vector3D position = new Vector3D(0, 0, 0);
 
         private int actualEmissions = 0;
+
+        public ParticleBase particle = new ParticleBase(0, new Vector3D(0, 0, 0), new Vector3D(0, 0, 0));
 
         public int group = 0;
 
@@ -29,15 +31,15 @@ namespace ModelScript.Physics.Particle.Emitter
                     var velocity3 = new Vector3D(-velocity.x, velocity.y, 0);
                     var velocity4 = new Vector3D(-velocity.x, -velocity.y, 0);
 
-                    var particle = new ParticleBase(group, position, velocity * speed);
-                    var particle2 = new ParticleBase(group, position, velocity2 * speed);
-                    var particle3 = new ParticleBase(group, position, velocity3 * speed);
-                    var particle4 = new ParticleBase(group, position, velocity4 * speed);
-
+                    particle.position = position;
+                    particle.velocity = velocity * speed;
                     parts.Add(particle);
-                    parts.Add(particle2);
-                    parts.Add(particle3);
-                    parts.Add(particle4);
+                    particle.velocity = velocity2 * speed;
+                    parts.Add(particle);
+                    particle.velocity = velocity3 * speed;
+                    parts.Add(particle);
+                    particle.velocity = velocity4 * speed;
+                    parts.Add(particle);
 
                 }
                 actualEmissions++;
