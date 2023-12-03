@@ -28,6 +28,11 @@
 
         }
 
+        public void changeValue(int x, int y, float change)
+        {
+            values[y, x] += change;
+        }
+
         public float getValue(int x, int y)
         {
             return values[y, x];

@@ -105,11 +105,11 @@ namespace ModelScript.Graphs.SimuGraphs
 
                         if (attribute == "")
                         {
-                            matrix.setValue(val1, val2, matrix.getValue(val1, val2) + 1);
+                            matrix.changeValue(val1, val2, 1);
                         }
                         else
                         {
-                            matrix.setValue(val1, val2, matrix.getValue(val1, val2) + p.attributes[attribute]);
+                            matrix.changeValue(val1, val2, p.attributes[attribute]);
                         }
                     }
 
