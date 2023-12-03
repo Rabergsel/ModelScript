@@ -17,6 +17,7 @@ namespace ModelScript.Simulation
         public List<EmitterBase> emitters = new List<EmitterBase>();
         public List<ObjectBase> objects = new List<ObjectBase>();
 
+        public List<Calculators.CalculatorBase> calculators = new List<Calculators.CalculatorBase>();
         public abstract void run(float timespan, float timestep);
 
         internal abstract void updateParticles(float time, float timestep);

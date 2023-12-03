@@ -9,11 +9,9 @@ namespace ModelScript.Physics.Particle.Emitter
         public int activations = 2;
         public float speed = 1f;
 
-        public Vector3D position = new Vector3D(0, 0, 0);
+        public Vector3D position;
 
         private int actualEmissions = 0;
-
-        public ParticleBase particle = new ParticleBase(0, new Vector3D(0, 0, 0), new Vector3D(0, 0, 0));
 
         public int group = 0;
 
@@ -26,20 +24,20 @@ namespace ModelScript.Physics.Particle.Emitter
 
                 for (float i = 0; i <= amount; i++)
                 {
-                    var velocity = new Vector3D(i * (1 / amount), (float)Math.Sqrt(1 - Math.Pow(i * (1 / amount), 2)), 0);
-                    var velocity2 = new Vector3D(velocity.x, -velocity.y, 0);
-                    var velocity3 = new Vector3D(-velocity.x, velocity.y, 0);
-                    var velocity4 = new Vector3D(-velocity.x, -velocity.y, 0);
+                    var velocity1 = new Vector3D(i * (1 / amount), (float)Math.Sqrt(1 - Math.Pow(i * (1 / amount), 2)), 0);
+                    var velocity2 = new Vector3D(velocity1.x, -velocity1.y, 0);
+                    var velocity3 = new Vector3D(-velocity1.x, velocity1.y, 0);
+                    var velocity4 = new Vector3D(-velocity1.x, -velocity1.y, 0);
 
-                    particle.position = position;
-                    particle.velocity = velocity * speed;
-                    parts.Add(particle);
-                    particle.velocity = velocity2 * speed;
-                    parts.Add(particle);
-                    particle.velocity = velocity3 * speed;
-                    parts.Add(particle);
-                    particle.velocity = velocity4 * speed;
-                    parts.Add(particle);
+                    var paricle1 = new ParticleBase(group, position, velocity1 * speed);
+                    var paricle2 = new ParticleBase(group, position, velocity2 * speed);
+                    var paricle3 = new ParticleBase(group, position, velocity3 * speed);
+                    var paricle4 = new ParticleBase(group, position, velocity4 * speed);
+
+                    parts.Add(paricle1);
+                    parts.Add(paricle2);
+                    parts.Add(paricle3);
+                    parts.Add(paricle4);
 
                 }
                 actualEmissions++;

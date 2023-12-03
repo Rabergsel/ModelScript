@@ -6,41 +6,36 @@ using ModelScript.Physics.Particle;
 
 Environment2D world = new Environment2D();
 
-var emitter = new ModelScript.Physics.Particle.Emitter.Circle2DEmitter() { amount = 100, activations = 5, particle = new SquareDeflatingParticle(1f, 1f) };
+var emitter = new ModelScript.Physics.Particle.Emitter.Circle2DEmitter() { amount = 30, activations = 20};
 //emitter.vector = new ModelScript.Maths.Numeric.Vectors.Vector3D(0f, 1f, 0);
 emitter.position = new ModelScript.Maths.Numeric.Vectors.Vector3D(0, 0, 0);
 
+var calc = new ModelScript.Simulation.Calculators.SonicAmplitudeCalculator() { frequency = 0.5f};
+world.calculators.Add(calc);
 
 world.emitters.Add(emitter);
 
 var visu = new SimulationGraphFrame();
-visu.addGraph(new ParticleGraph() { plane = "XY" });
-
+visu.addGraph(new EncodingParticleGraph() { plane = "XY", attribute = "sonicEnergy", fixedValues = true, minVal = -1f, maxVal = 1f });
+visu.addGraph(new FieldGraph() { gradient = new BWGradient(128), matrixHeight = 50, matrixWidth = 50, attribute = "sonicEnergy" });
 visu.setHeight(500, 500);
 world.visus.Add(visu);
 
 
-var visu2 = new SimulationGraphFrame();
-visu2.addGraph(new FieldGraph() { gradient = new BWGradient(128), matrixHeight = 5, matrixWidth = 5, attribute = "amplitude" });
-visu2.setHeight(500, 500);
-world.visus.Add(visu2);
+
 
 
 var wall1 = new AlignedPlane(new ModelScript.Maths.Numeric.Vectors.Vector3D(5, -10, -10), new ModelScript.Maths.Numeric.Vectors.Vector3D(5, 10, 10));
 var wall2 = new AlignedPlane(new ModelScript.Maths.Numeric.Vectors.Vector3D(-5, -10, -10), new ModelScript.Maths.Numeric.Vectors.Vector3D(-5, 10, 10));
-var wall3 = new AlignedPlane(new ModelScript.Maths.Numeric.Vectors.Vector3D(-15, 25, -10), new ModelScript.Maths.Numeric.Vectors.Vector3D(15, 25, 10));
-
-var square = new AlignedSquare(-50, -50, 100, 100);
+var square = new AlignedSquare(-20, -20, 30, 30);
 
 world.objects.Add(wall1);
 world.objects.Add(wall2);
-world.objects.Add(wall3);
 world.objects.Add(square);
 
-world.run(100, 0.9f);
+world.run(35, 0.2f);
 
 VideoStacker.makeVideo(world.images[0], 24);
-VideoStacker.makeVideo(world.images[1], 24, "field.webm");
 
 
 

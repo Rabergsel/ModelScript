@@ -10,6 +10,8 @@ namespace ModelScript.Physics.Particle
         public Vector3D position;
         public Vector3D velocity;
 
+        public float movedWay = 0f;
+
         public ParticleBase(int group, Vector3D position, Vector3D velocity)
         {
             this.group = group;
@@ -28,6 +30,7 @@ namespace ModelScript.Physics.Particle
         {
             //Console.Write("Pos before: {0}\t delta = ", position.ToString(), delta.ToString());
             position += delta;
+            movedWay += delta.Length;
             //Console.WriteLine("Pos after: {0}", position.ToString());
         }
 

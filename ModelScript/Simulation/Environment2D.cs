@@ -33,8 +33,14 @@ namespace ModelScript.Simulation
             foreach (var emitter in emitters)
             {
                 var newParticles = emitter.emit();
-                foreach (var particle in newParticles)
+                for(int i = 0; i < newParticles.Count; i++)
                 {
+                    var particle = newParticles[i];
+                    foreach(var c in calculators)
+                    {
+                        c.onEmission(ref particle, time);
+                    }
+
                     particles.Add(particle);
                 }
             }
@@ -43,6 +49,20 @@ namespace ModelScript.Simulation
         internal override void updateParticles(float time, float timestep)
         {
             particleFilter();
+
+            //Calculator onTimestep update;
+            for(int i = 0; i < particles.Count; i++)
+            {
+                var p = particles[i];
+
+                foreach(var c in calculators)
+                {
+                    c.onTimestep(ref p);
+                }
+
+                particles[i] = p;
+
+            }
 
             for (int i = 0; i < particles.Count; i++)
             {
