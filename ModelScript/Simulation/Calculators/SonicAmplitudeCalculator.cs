@@ -6,6 +6,7 @@ namespace ModelScript.Simulation.Calculators
     {
         public float energy = 1f;
         public float frequency = 1f;
+        
         public override void init(ref ParticleBase particle)
         {
 

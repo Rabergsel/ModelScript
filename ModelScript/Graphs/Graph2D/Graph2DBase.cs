@@ -26,8 +26,14 @@ namespace ModelScript.Graphs.Graph2D
             values.Add(pointF);
         }
 
-        internal void evaluateBounds(float factor = 1.05f)
+        internal void evaluateBounds(float factor = 1.0f)
         {
+            minBounds.X = float.MaxValue;
+            minBounds.Y = float.MaxValue;
+
+            maxBounds.X = float.MinValue;
+            maxBounds.Y = float.MinValue;
+
             foreach (var p in values)
             {
                 if (p.X < minBounds.X)

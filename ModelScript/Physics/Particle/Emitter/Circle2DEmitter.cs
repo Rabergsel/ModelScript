@@ -15,6 +15,9 @@ namespace ModelScript.Physics.Particle.Emitter
 
         public int group = 0;
 
+        public float maxNoise = 0.01f;
+
+
         public override List<ParticleBase> emit()
         {
 
@@ -24,7 +27,8 @@ namespace ModelScript.Physics.Particle.Emitter
 
                 for (float i = 0; i <= amount; i++)
                 {
-                    var velocity1 = new Vector3D(i * (1 / amount), (float)Math.Sqrt(1 - Math.Pow(i * (1 / amount), 2)), 0);
+                    float noise = (float)(new Random().NextDouble()) * maxNoise;
+                    var velocity1 = new Vector3D((i + noise) * (1 / amount), (float)Math.Sqrt(1 - Math.Pow((i + noise) * (1 / amount), 2)), 0);
                     var velocity2 = new Vector3D(velocity1.x, -velocity1.y, 0);
                     var velocity3 = new Vector3D(-velocity1.x, velocity1.y, 0);
                     var velocity4 = new Vector3D(-velocity1.x, -velocity1.y, 0);

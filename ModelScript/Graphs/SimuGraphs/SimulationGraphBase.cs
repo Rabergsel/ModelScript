@@ -13,11 +13,14 @@ namespace ModelScript.Graphs.SimuGraphs
         public Vector3D minPoint = new Vector3D(float.MaxValue, float.MaxValue, float.MaxValue);
         public Vector3D maxPoint = new Vector3D(float.MinValue, float.MinValue, float.MinValue);
 
-        public void loadSimulationState(List<ParticleBase> particles, List<EmitterBase> emitters, List<ObjectBase> objects)
+        public float time = 0f;
+
+        public void loadSimulationState(List<ParticleBase> particles, List<EmitterBase> emitters, List<ObjectBase> objects, float time)
         {
             particleList.AddRange(particles.ToArray());
             emitterList.AddRange(emitters.ToArray());
             objectList.AddRange(objects.ToArray());
+            this.time = time;
         }
 
         public void clearSimulationState()

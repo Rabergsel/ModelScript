@@ -30,7 +30,7 @@ namespace ModelScript.Graphs.SimuGraphs
             p = particles.Count;
             foreach (var graph in graphs)
             {
-                graph.loadSimulationState(particles, emitters, objects);
+                graph.loadSimulationState(particles, emitters, objects, t);
             }
         }
 

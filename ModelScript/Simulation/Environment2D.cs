@@ -5,6 +5,8 @@ namespace ModelScript.Simulation
     public class Environment2D : EnvironmentBase
     {
 
+        public float maxDistance = 40f;
+
         public override void run(float timespan, float timestep)
         {
             var stopwatch = System.Diagnostics.Stopwatch.StartNew();
@@ -137,7 +139,7 @@ namespace ModelScript.Simulation
         {
             for (int i = 0; i < particles.Count; i++)
             {
-                if (particles[i].position.z != 0)
+                if (particles[i].position.z != 0 || (particles[i].position).Length > maxDistance)
                 {
                     particles.RemoveAt(i);
                 }
