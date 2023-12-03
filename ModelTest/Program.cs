@@ -2,15 +2,14 @@
 using ModelScript.Graphs.Utilities.Gradients;
 using ModelScript.Physics.Objects;
 using ModelScript.Simulation;
-using ModelScript.Physics.Particle;
 
 Environment2D world = new Environment2D();
 
-var emitter = new ModelScript.Physics.Particle.Emitter.Circle2DEmitter() { amount = 30, activations = 20};
+var emitter = new ModelScript.Physics.Particle.Emitter.Circle2DEmitter() { amount = 30, activations = 20 };
 //emitter.vector = new ModelScript.Maths.Numeric.Vectors.Vector3D(0f, 1f, 0);
 emitter.position = new ModelScript.Maths.Numeric.Vectors.Vector3D(0, 0, 0);
 
-var calc = new ModelScript.Simulation.Calculators.SonicAmplitudeCalculator() { frequency = 0.5f};
+var calc = new ModelScript.Simulation.Calculators.SonicAmplitudeCalculator() { frequency = 0.5f };
 world.calculators.Add(calc);
 
 world.emitters.Add(emitter);

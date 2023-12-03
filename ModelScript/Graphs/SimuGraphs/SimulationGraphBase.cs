@@ -30,15 +30,37 @@ namespace ModelScript.Graphs.SimuGraphs
 
         public void evaluateParticleBoundaries()
         {
-            foreach(var p in particleList)
+            foreach (var p in particleList)
             {
-                if (p.position.x < minPoint.x) minPoint.x = p.position.x;
-                if (p.position.y < minPoint.y) minPoint.y = p.position.y;
-                if (p.position.z < minPoint.z) minPoint.z = p.position.z;
+                if (p.position.x < minPoint.x)
+                {
+                    minPoint.x = p.position.x;
+                }
 
-                if (p.position.x > maxPoint.x) maxPoint.x = p.position.x;
-                if (p.position.y > maxPoint.y) maxPoint.y = p.position.y;
-                if (p.position.z > maxPoint.z) maxPoint.z = p.position.z;
+                if (p.position.y < minPoint.y)
+                {
+                    minPoint.y = p.position.y;
+                }
+
+                if (p.position.z < minPoint.z)
+                {
+                    minPoint.z = p.position.z;
+                }
+
+                if (p.position.x > maxPoint.x)
+                {
+                    maxPoint.x = p.position.x;
+                }
+
+                if (p.position.y > maxPoint.y)
+                {
+                    maxPoint.y = p.position.y;
+                }
+
+                if (p.position.z > maxPoint.z)
+                {
+                    maxPoint.z = p.position.z;
+                }
             }
         }
 

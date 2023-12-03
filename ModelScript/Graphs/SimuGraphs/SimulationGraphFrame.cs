@@ -56,14 +56,14 @@ namespace ModelScript.Graphs.SimuGraphs
             {
                 SKCanvas canvas = surface.Canvas;
 
-              /*  canvas.DrawRect(0, 0, width, height, new SKPaint()
-                {
-                    TextSize = 10,
-                    Color = SKColors.DarkGray,
-                    Style = SKPaintStyle.Fill,
-                    StrokeWidth = 2
-                });
-              */
+                /*  canvas.DrawRect(0, 0, width, height, new SKPaint()
+                  {
+                      TextSize = 10,
+                      Color = SKColors.DarkGray,
+                      Style = SKPaintStyle.Fill,
+                      StrokeWidth = 2
+                  });
+                */
 
                 foreach (GraphBase graph in graphs)
                 {

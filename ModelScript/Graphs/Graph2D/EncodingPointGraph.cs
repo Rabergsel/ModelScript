@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using ModelScript.Graphs.Scaler;
+﻿using SkiaSharp;
 using System.Drawing;
-
-using SkiaSharp;
 
 namespace ModelScript.Graphs.Graph2D
 {
@@ -16,13 +8,12 @@ namespace ModelScript.Graphs.Graph2D
         public int pointSize = 2;
         public SKColor color = SKColors.Red;
 
-        public Utilities.Gradients.GradientBase pointColorGradient  = new Utilities.Gradients.GRGradient(255);
+        public Utilities.Gradients.GradientBase pointColorGradient = new Utilities.Gradients.GRGradient(255);
 
         public bool fixedBounds = false;
         public float minVal = -1f;
         public float maxVal = 1f;
-
-        List<float> pointValues = new List<float>();
+        private List<float> pointValues = new List<float>();
 
         public void addValue(float x, float y, float value)
         {
@@ -39,7 +30,7 @@ namespace ModelScript.Graphs.Graph2D
         private Tuple<float, float> pointValueBoundaries()
         {
 
-            if(fixedBounds)
+            if (fixedBounds)
             {
                 return new Tuple<float, float>(minVal, maxVal);
             }
@@ -47,10 +38,17 @@ namespace ModelScript.Graphs.Graph2D
             var min = float.MaxValue;
             var max = float.MinValue;
 
-            foreach(var value in pointValues)
+            foreach (var value in pointValues)
             {
-                if (value < min) min = value;
-                if (value > max) max = value;
+                if (value < min)
+                {
+                    min = value;
+                }
+
+                if (value > max)
+                {
+                    max = value;
+                }
             }
 
             var tuple = new Tuple<float, float>(min, max);
@@ -70,11 +68,11 @@ namespace ModelScript.Graphs.Graph2D
             {
                 skPaint.Style = SKPaintStyle.Stroke;
                 skPaint.IsAntialias = true;
-                
+
                 skPaint.StrokeWidth = pointSize;
                 skPaint.StrokeCap = SKStrokeCap.Round;
 
-                for(int i = 0; i < coords.Count; i++)
+                for (int i = 0; i < coords.Count; i++)
                 {
                     var p = coords[i];
                     var c = pointColorGradient.getClampedRGB(pointValues[i], boundaries.Item1, boundaries.Item2);

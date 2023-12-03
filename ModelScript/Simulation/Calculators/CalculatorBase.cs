@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using ModelScript.Physics.Particle;
 
 namespace ModelScript.Simulation.Calculators

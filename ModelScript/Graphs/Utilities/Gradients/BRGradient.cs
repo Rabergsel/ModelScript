@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ModelScript.Graphs.Utilities.Gradients
+﻿namespace ModelScript.Graphs.Utilities.Gradients
 {
     public class BRGradient : GradientBase
     {
-
-        byte alpha = 128;
+        private byte alpha = 128;
 
 
         public BRGradient(byte alpha)

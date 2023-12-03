@@ -1,18 +1,13 @@
 ﻿using ModelScript.Maths.Numeric.Vectors;
 using ModelScript.Physics.Particle;
 using SkiaSharp;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ModelScript.Physics.Objects
 {
     public class AlignedSquare : ObjectBase
     {
-        List<AlignedPlane> planes = new List<AlignedPlane>();
+        private List<AlignedPlane> planes = new List<AlignedPlane>();
 
 
         public AlignedSquare(float x, float y, float width, float height)
@@ -35,10 +30,25 @@ namespace ModelScript.Physics.Objects
 
         public override bool reflectParticle(ParticleBase particle, float deltaT, out Vector3D collisionPos, out Vector3D remainingWay, out Vector3D newVelocity)
         {
-            if (planes[0].reflectParticle(particle, deltaT, out collisionPos, out remainingWay, out newVelocity)) return true;
-            if (planes[1].reflectParticle(particle, deltaT, out collisionPos, out remainingWay, out newVelocity)) return true;
-            if (planes[2].reflectParticle(particle, deltaT, out collisionPos, out remainingWay, out newVelocity)) return true;
-            if (planes[3].reflectParticle(particle, deltaT, out collisionPos, out remainingWay, out newVelocity)) return true;
+            if (planes[0].reflectParticle(particle, deltaT, out collisionPos, out remainingWay, out newVelocity))
+            {
+                return true;
+            }
+
+            if (planes[1].reflectParticle(particle, deltaT, out collisionPos, out remainingWay, out newVelocity))
+            {
+                return true;
+            }
+
+            if (planes[2].reflectParticle(particle, deltaT, out collisionPos, out remainingWay, out newVelocity))
+            {
+                return true;
+            }
+
+            if (planes[3].reflectParticle(particle, deltaT, out collisionPos, out remainingWay, out newVelocity))
+            {
+                return true;
+            }
 
             return false;
 
@@ -46,7 +56,7 @@ namespace ModelScript.Physics.Objects
 
         public override void visualize(string alignment, ref SKCanvas canvas, int width, int height, PointF minCoord, PointF maxCoord)
         {
-            foreach(var plane in planes)
+            foreach (var plane in planes)
             {
                 plane.visualize(alignment, ref canvas, width, height, minCoord, maxCoord);
             }

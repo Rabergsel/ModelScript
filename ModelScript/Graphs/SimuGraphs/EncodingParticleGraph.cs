@@ -29,21 +29,38 @@ namespace ModelScript.Graphs.SimuGraphs
                 //  Console.WriteLine("Rendering: {0}|{1}|{2} with vector {3}|{4}|{5}", p.position.x, p.position.y, p.position.z, p.velocity.x, p.velocity.y, p.velocity.z);
                 if (plane == "XY")
                 {
-                    if(attribute == "") pointGraph.addValue(p.position.x, p.position.y, 0);
-                    else pointGraph.addValue(p.position.x, p.position.y, p.attributes[attribute]);
+                    if (attribute == "")
+                    {
+                        pointGraph.addValue(p.position.x, p.position.y, 0);
+                    }
+                    else
+                    {
+                        pointGraph.addValue(p.position.x, p.position.y, p.attributes[attribute]);
+                    }
                 }
 
                 if (plane == "YZ")
                 {
-                    if(attribute == "") pointGraph.addValue(p.position.y, p.position.z, 0);
-                    else pointGraph.addValue(p.position.y, p.position.z, p.attributes[attribute]);
+                    if (attribute == "")
+                    {
+                        pointGraph.addValue(p.position.y, p.position.z, 0);
+                    }
+                    else
+                    {
+                        pointGraph.addValue(p.position.y, p.position.z, p.attributes[attribute]);
+                    }
                 }
 
                 if (plane == "XZ")
                 {
-                    if(attribute == "") pointGraph.addValue(p.position.x, p.position.z, 0);
-                    else pointGraph.addValue(p.position.x, p.position.z, p.attributes[attribute]);
-
+                    if (attribute == "")
+                    {
+                        pointGraph.addValue(p.position.x, p.position.z, 0);
+                    }
+                    else
+                    {
+                        pointGraph.addValue(p.position.x, p.position.z, p.attributes[attribute]);
+                    }
                 }
             }
 

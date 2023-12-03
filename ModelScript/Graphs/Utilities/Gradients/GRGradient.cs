@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ModelScript.Graphs.Utilities.Gradients
+﻿namespace ModelScript.Graphs.Utilities.Gradients
 {
     public class GRGradient : GradientBase
     {
-        byte alpha = 128;
+        private byte alpha = 128;
 
 
         public GRGradient(byte alpha)
@@ -23,7 +17,7 @@ namespace ModelScript.Graphs.Utilities.Gradients
         /// <returns>A Tuple with the values R, G, B, A</returns>
         public override Tuple<int, int, int, int> getRGB(float value)
         {
-            return new Tuple<int, int, int, int>((int)(value * 255), (int)(255-(value * 255)), 0, alpha);
+            return new Tuple<int, int, int, int>((int)(value * 255), (int)(255 - (value * 255)), 0, alpha);
         }
     }
 }
