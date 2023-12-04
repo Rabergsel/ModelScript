@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace ModelScript.Flow.Input
 {
-    public class InputBase
+    public abstract class InputBase
     {
 
+        public abstract void read();
 
+        public abstract Dictionary<string, string> process();
 
     }
 }
